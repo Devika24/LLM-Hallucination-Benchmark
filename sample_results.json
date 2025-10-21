@@ -1,0 +1,123 @@
+{
+  "model": "gpt-3.5-turbo",
+  "dataset": "truthfulqa",
+  "timestamp": "2024-10-21T14:30:00",
+  "configuration": {
+    "similarity_threshold": 0.75,
+    "batch_size": 32,
+    "detection_method": "semantic"
+  },
+  "metrics": {
+    "accuracy": 0.8456,
+    "precision": 0.8234,
+    "recall": 0.8678,
+    "f1_score": 0.8451,
+    "hallucination_rate": 0.157,
+    "true_positives": 156,
+    "true_negatives": 534,
+    "false_positives": 34,
+    "false_negatives": 93,
+    "specificity": 0.9402,
+    "rouge1": 0.7823,
+    "rouge2": 0.6457,
+    "rougeL": 0.7456,
+    "bleu": 0.6234,
+    "bertscore": 0.8912,
+    "avg_similarity": 0.8123,
+    "std_similarity": 0.1234,
+    "min_similarity": 0.3456,
+    "max_similarity": 0.9876,
+    "roc_auc": 0.9123
+  },
+  "predictions": [
+    {
+      "id": "tqa_001",
+      "query": "What is the capital of France?",
+      "response": "The capital of France is Paris.",
+      "reference": "Paris is the capital and most populous city of France.",
+      "predicted_hallucination": false,
+      "actual_hallucination": false,
+      "similarity_score": 0.923,
+      "factual_errors": []
+    },
+    {
+      "id": "tqa_002",
+      "query": "How tall is the Eiffel Tower?",
+      "response": "The Eiffel Tower is 330 meters tall.",
+      "reference": "The Eiffel Tower is 324 meters tall including antennas.",
+      "predicted_hallucination": true,
+      "actual_hallucination": true,
+      "similarity_score": 0.687,
+      "factual_errors": [
+        {
+          "type": "numerical",
+          "value": "330",
+          "context": "Incorrect height measurement"
+        }
+      ]
+    },
+    {
+      "id": "tqa_003",
+      "query": "Who invented the telephone?",
+      "response": "Alexander Graham Bell is credited with inventing the telephone in 1876.",
+      "reference": "Alexander Graham Bell patented the telephone in 1876.",
+      "predicted_hallucination": false,
+      "actual_hallucination": false,
+      "similarity_score": 0.895,
+      "factual_errors": []
+    },
+    {
+      "id": "tqa_004",
+      "query": "What is the speed of light?",
+      "response": "The speed of light in vacuum is approximately 300,000 kilometers per second.",
+      "reference": "The speed of light in vacuum is exactly 299,792,458 meters per second.",
+      "predicted_hallucination": false,
+      "actual_hallucination": false,
+      "similarity_score": 0.912,
+      "factual_errors": []
+    },
+    {
+      "id": "tqa_005",
+      "query": "When did World War II end?",
+      "response": "World War II ended in 1946 with the Treaty of Paris.",
+      "reference": "World War II ended in 1945 with Japan's surrender in September.",
+      "predicted_hallucination": true,
+      "actual_hallucination": true,
+      "similarity_score": 0.654,
+      "factual_errors": [
+        {
+          "type": "temporal",
+          "value": "1946",
+          "context": "Incorrect year"
+        },
+        {
+          "type": "factual",
+          "value": "Treaty of Paris",
+          "context": "Incorrect treaty name"
+        }
+      ]
+    }
+  ],
+  "error_analysis": {
+    "total_errors": 128,
+    "error_types": {
+      "numerical_errors": 45,
+      "entity_errors": 38,
+      "temporal_errors": 25,
+      "logical_contradictions": 12,
+      "semantic_drift": 8
+    },
+    "severity_distribution": {
+      "high": 42,
+      "medium": 67,
+      "low": 19
+    }
+  },
+  "performance_stats": {
+    "total_samples": 817,
+    "processing_time_seconds": 245.7,
+    "avg_time_per_sample": 0.301,
+    "api_calls": 817,
+    "total_cost_usd": 0.82
+  }
+}

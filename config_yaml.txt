@@ -1,0 +1,165 @@
+# LLM Hallucination Benchmark Configuration
+
+# Model Configuration
+models:
+  gpt-3.5-turbo:
+    provider: "openai"
+    max_tokens: 2048
+    temperature: 0.0
+    top_p: 1.0
+    
+  gpt-4:
+    provider: "openai"
+    max_tokens: 4096
+    temperature: 0.0
+    top_p: 1.0
+    
+  claude-2:
+    provider: "anthropic"
+    max_tokens: 4096
+    temperature: 0.0
+    
+  llama-2-70b:
+    provider: "huggingface"
+    model_path: "meta-llama/Llama-2-70b-chat-hf"
+    max_tokens: 2048
+    temperature: 0.0
+
+# Dataset Configuration
+datasets:
+  truthfulqa:
+    path: "data/truthfulqa/"
+    size: 817
+    task_type: "qa"
+    has_labels: true
+    
+  fever:
+    path: "data/fever/"
+    size: 145449
+    task_type: "fact_verification"
+    has_labels: true
+    
+  halueval:
+    path: "data/halueval/"
+    size: 35000
+    task_type: "multi_task"
+    has_labels: true
+    
+  custom:
+    path: "data/custom/"
+    format: "json"
+    has_labels: false
+
+# Detection Configuration
+detection:
+  methods:
+    - semantic
+    - factual
+    - contradiction
+  
+  semantic:
+    model: "sentence-transformers/all-MiniLM-L6-v2"
+    threshold: 0.75
+    use_cache: true
+    batch_size: 32
+    
+  factual:
+    entity_extraction: true
+    number_tolerance: 0.05
+    require_verification: true
+    
+  contradiction:
+    check_negation: true
+    similarity_threshold: 0.7
+
+# Evaluation Configuration
+evaluation:
+  metrics:
+    - accuracy
+    - precision
+    - recall
+    - f1_score
+    - roc_auc
+    - bleu
+    - rouge
+    - bertscore
+  
+  calibration:
+    enabled: true
+    n_bins: 10
+  
+  cross_validation:
+    enabled: false
+    n_folds: 5
+
+# Visualization Configuration
+visualization:
+  generate_plots: true
+  plot_types:
+    - confusion_matrix
+    - roc_curve
+    - pr_curve
+    - metrics_comparison
+    - similarity_distribution
+  
+  dashboard:
+    create_html: true
+    interactive: false
+  
+  style:
+    theme: "whitegrid"
+    color_palette: "Set3"
+    figure_dpi: 300
+
+# Output Configuration
+output:
+  base_dir: "results/"
+  save_predictions: true
+  save_metrics: true
+  save_visualizations: true
+  save_logs: true
+  
+  format:
+    results: "json"
+    logs: "txt"
+    visualizations: "png"
+
+# Logging Configuration
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "logs/benchmark.log"
+  console: true
+
+# API Configuration
+api:
+  openai:
+    api_key_env: "OPENAI_API_KEY"
+    base_url: "https://api.openai.com/v1"
+    retry_attempts: 3
+    timeout: 30
+    
+  anthropic:
+    api_key_env: "ANTHROPIC_API_KEY"
+    retry_attempts: 3
+    timeout: 30
+    
+  huggingface:
+    api_key_env: "HUGGINGFACE_API_KEY"
+    use_local: false
+    device: "cuda"
+
+# Performance Configuration
+performance:
+  enable_caching: true
+  cache_dir: "cache/"
+  parallel_processing: true
+  max_workers: 4
+  batch_size: 32
+  
+# Experiment Tracking
+experiment:
+  track_experiments: true
+  save_checkpoints: true
+  checkpoint_frequency: 100
+  experiment_name: "hallucination_benchmark_v1"
