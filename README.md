@@ -19,7 +19,7 @@ Large Language Models often generate responses that deviate from factual informa
 
 - 🔍 **Multi-modal Detection**: Supports both intrinsic and extrinsic hallucination evaluation
 - 📊 **Comprehensive Metrics**: Accuracy, Precision, Recall, F1, BLEU, ROUGE, and BERTScore
-- 🎨 **Visualization Tools**: Confusion matrices, ROC curves, and comparative bar charts
+- 🎨 **Visualization Techniques**: Confusion matrices, ROC curves, and comparative bar charts
 - 🔄 **Dynamic Test Generation**: Prevents data leakage and ensures robust evaluation
 - 📈 **Batch Processing**: Efficient evaluation of multiple models simultaneously
 
